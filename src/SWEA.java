@@ -77,7 +77,7 @@ public class SWEA {
 //]
 //statement2;
 //
-//초기식에 대해 조건식이 true이면 statement1을 수행, 증감식을 적용,
+//초기식에 대해 조건식이 true이면cc statement1을 수행, 증감식을 적용,
 //다시 조건식이 true인지 확인.
 //증감식이 없으면 조건식과 statement1 사이의 무한루프가 발생.
 //조건식이 false가 될 시 이제 statement2 수행.
