@@ -153,14 +153,14 @@ public class SWEA_2 {
 
 
 //        abstract class SuperClass {     // 내부에 객체를 형성할 수 없는 '추상'클래스에 해당. 상속에 활용된다는 점에서 의미를 가짐.
-//            void methodA() {            // 추상클래스도 내부에서
+//            void methodA() {
 //                System.out.println("A실행");
 //            }
 //            abstract void methodB();            // "추상메서드"에 해당. 매개변수나 이름 정도는 선언했으나 구체적인 기능은 아직 정해지지 않음
 //        }
 //        class SubClass extends SuperClass {
 //            void methodB(){             // 추상메서드를 자식클래스에서 "오버라이딩"함으로써 비로소 의미를 가지게 됨.
-//                System.out.println("B실행");
+//                System.out.println("B실행");        // 반대로 말하면, 추상클래스를 상속받는 자식클래스가 제대로 기능하기 위해서는 부모클래스의 "모든 추상메서드"를 "오버라이딩"해야한다는 뜻. 자식클래스도 추상이면 또 모를까.
 //            }
 //        }
 //////////////////        SuperClass Y = new SuperClass();        // 이거 풀면 오류뜸. SuperClass가 추상클래스라 객체 대입이 불가능
@@ -267,6 +267,138 @@ public class SWEA_2 {
 //        System.out.println(y.intSum(5,7,8,4,4,3,2));        // 이렇게 매개변수 개수를 맘대로 넣을 수 있다는 것.
 
 
+
+//        class SuperClass {
+//            int num1;
+//            SuperClass() {      // SuperClass 내부 변수를 초기화시키는 생성자메서드. ()로 매개변수 자리가 비어있으므로 '기본생성자' 라고 함
+//                num1=100;       // 만약에 이걸 SuperClass(int num) 이렇게 입력할 시, 자식 클래스에서 불러올 수 있는 '기본생성자'가 없기 때문에 오류가 발생한다.
+//            }
+//        }
+//        class SubClass extends SuperClass {     // 상속받음
+//            int num2;
+//            SubClass() {        // 마찬가지로 생성자메서드인데, 특별히 SuperClass(); 를 호출하는 부분은 없다.
+//                num2=10000;
+//            }
+//        }
+//        SubClass sub = new SubClass();
+//        System.out.println(sub.num1);      // 100이 정상 출력
+//        System.out.println(sub.num2);      // 즉, 명시하지 않아도 자식클래스는 부모클래스의 '기본'생성자메서드를 호출해옴.
+
+
+
+//        class Shape {
+//            int x = 0;
+//            int y = 0;
+//            Shape() {           // 기본생성자.
+//                this(0,0);      // 얜 뭐지 이렇게 써도 상관없는건가
+//            }
+//            Shape(int x, int y) {
+//                this.x = x;
+//                this.y = y;
+//            }
+//        }
+//        class Circle extends Shape {                // 상속 시, 부모클래스의 private 변수는 상속되지 않는다. 자식클래스에서 부모클래스의 private변수에 접근(초기화)하려고 하면 오류 발생
+//            int radius;                              // 그 외 변수들은 상속되지만, 자식 클래스에서 부모클래스의 변수와 같은 이름의 변수를 다르게 초기화할 경우 (자료형이 달라지는 경우 포함) 그걸 따라가게된다. 변수..오버라이딩?
+//            Circle(int x, int y, int radius) {      // 얘도 자식클래스의 자체적인 생성자메서드
+//                super(x, y);         // super는 파이썬의 self, 자바의 this가 했던 것처럼 특정 메서드를 지칭하는 단어. 자식클래스에서 부모클래스의 생성자를 호출할 때 사용. Circle 클래스로 입력받은 x,y값을 부모클래스 속 Shape 메서드에 집어넣겠다는 의미
+//                this.radius = radius;       // super(int x, int y)라고 했더니 x랑 y를 local 매개변수로 인식한다. 이미 Circle에서 선언해놨으니 헷갈리는 모양
+//            }                           // 만약 super부분을 아예 빼버릴 시, "기본생성자"가 호출되므로 x랑 y는 0으로 초기화될 수밖에 없다
+//            void draw() {               // *** super()로 부모클래스의 생성자를 가져오려면 자식클래스 생성자 선언 직후 맨 윗줄에 있어야 한다. this.radius가 먼저나오면 오류
+//                System.out.println(x+","+y+","+radius);
+//            }
+//        }
+//        Circle c = new Circle(200,500,100);
+//        c.draw();
+
+
+
+
+//        class Employee {
+//            String name;
+//            int deptNo;
+//            String grade;
+//        }
+//        class Manager extends Employee {
+//            String boss;
+//            char grade;
+//            void printGrade() {
+//                this.grade = 'A';           // 같은 이름의 변수에 대해 this와 super로 위치를 구분하는 모습.
+//                super.grade = "A등급";
+//                System.out.println(this.grade + "," + super.grade);
+//            }
+//        }
+//        Manager kim = new Manager();
+//        kim.printGrade();
+
+
+
+//        class SuperClass {
+//            void print(String str) {
+//                System.out.println("호출");
+//            }
+//        }
+//        class SubClass extends SuperClass {
+//            void print() {          // 부모 클래스의 메서드와 같은 이름이라고 해서 "오버라이딩"이 아님. 매개변수 유형과 개수가 다르기 때문에, 이건 부모클래스로부터 모든 메서드를 상속받은 자식클래스에 print 메서드가 "오버로딩"된 것.
+//                System.out.println("또 호출");
+//            }
+//        }
+//        SubClass sub = new SubClass();
+//        sub.print("테스트");           // 그래서 둘다 정상 실행됨.
+//        sub.print();
+
+
+
+//        class Camera {
+//            String name;
+//            int sheets;
+//            void take() {         // 혹시 메서드에 오버라이딩을 허락하지 않으려면, final void로 선언하면 된다.
+//                System.out.println(name);     // 카메라를 예시로 들자면 PCamera가 반드시 들고있어야하는 기능에 대해서는 final을 걸어놓는 식
+//            }
+//        }
+//        class PCamera extends Camera {
+//            int battery;
+//            void take() {           // 이렇게 해야 제대로 메서드 오버라이딩이 가능
+//                super.take();           // 부모클래스 메서드의 기능을 살려주고 싶다면, 이렇게 명시해주면 되는 것. 코드 절약하기
+//                System.out.println(sheets);
+//                System.out.println(battery);
+//            }
+//        }
+//        PCamera c = new PCamera();
+//        c.name = "dd";
+//        c.sheets = 3;
+//        c.battery = 23;
+//        c.take();
+
+
+
+
+//        abstract class TV {             // 추상클래스와 메서드를 왜 사용하는지.
+//            abstract void powerOn();        // 자식클래스의 종류를 불문하고 무조건 들어가는 기능을 추상메서드로 박아놓음
+//            abstract void volumeUp();
+//
+//        }
+//        class S_TV extends TV {
+//            void powerOn() {            // 그럼 실제 제품에서 그걸 상속받은 이후에 오버라이딩함으로써 구체화하면 되는 것
+//                System.out.println("S_TV on");
+//            }
+//            void volumeUp() {
+//                System.out.println("S_TV up");
+//            }
+//        }
+//        class L_TV extends TV {
+//            void powerOn() {
+//                System.out.println("L_TV on");
+//            }
+//            void volumeUp() {
+//                System.out.println("L_TV up");
+//            }
+//        }
+//        S_TV tv = new S_TV();
+//        tv.powerOn();
+//        tv.volumeUp();
+//        L_TV tv2 = new L_TV();          // 만약 tv와 tv2 별개의 객체가 아닌, tv라는 객체가 S_Tv에서 L_TV로 갈아타야하는 상황에 대해 굉장히 유연하게 대응할 수 있음.
+//        tv2.powerOn();             // 최소한의 수정으로, 원하는 객체를 사용할 수 있으므로 유지보수가 편리함.
+//        tv2.volumeUp();
 
 
 
