@@ -402,6 +402,37 @@ public class SWEA_2 {
 
 
 
+//        int age = 25;       // int보다 double이 더 큰 범위의 자료형.
+//        double avgAge = age;  // 묵시적 형변환이 가능함. (double)age 이렇게 안써도 오류 안생김
+
+//        double avgAge = 24.56;
+//        int age = (int)avgAge;      // 이런 경우 변환자를 활용한 명시적 형변환이 필수
+//        System.out.println(age);        //24로 출력
+
+
+
+//        class Employee{
+//            String name;
+//            int No;
+//            void getInfo(){
+//            }
+//        }
+//        class Manager extends Employee {
+//            Employee[] employeeList;        // 신규 변수
+//            void getInfo(){     // 메서드 오버라이딩.       이로써 부모자식클래스 간 차별점 발생
+//                System.out.println("dd");
+//            }
+//        }
+//        Manager m = new Manager();
+//        Employee e = new Employee();
+//        System.out.println(m instanceof Manager);     // 특정 객체가 어떤 클래스의 인스턴스에 해당하는지 여부를 확인하는 함수. T/F값 반환
+//        System.out.println(m instanceof Employee);     // m은 Employee 클래스의 상속을 받은 Manager 클래스의 객체이므로 이것도 True
+//        System.out.println(e instanceof Manager);   // 이건 False
+//        Employee e2 = new Employee();
+//        Manager m2 = new Manager();
+//        Manager m3 = (Manager)e2;       //      이게 왜 오류가 안뜨는지, 무슨 의미인지 다시 이해할 필요
+//        System.out.println(e2 instanceof Manager);      //  이거 오류남. m3도 오류
+
 
 
     }
